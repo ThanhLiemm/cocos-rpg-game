@@ -1,23 +1,28 @@
-import { _decorator, animation, Component, EventKeyboard, Input, input, KeyCode, Node } from 'cc';
-import { PlayerStateMachine } from './PlayerStateMachine';
-import { PlayerIdleState } from './PlayerIdleState';
-import { PlayerMoveState } from './PlayerMoveState';
+import { _decorator, animation, Component, RigidBody2D } from 'cc';
 import { PLAYER_ANIMATION_STATE } from '../../concerns/type';
+import { PlayerIdleState } from './PlayerIdleState';
+import { PlayerMovement } from './PlayerMovement';
+import { PlayerMoveState } from './PlayerMoveState';
+import { PlayerStateMachine } from './PlayerStateMachine';
 const { ccclass, property } = _decorator;
 
 @ccclass('Player')
 export class Player extends Component {
     private stateMachine: PlayerStateMachine;
-    private idleState: PlayerIdleState;
-    private moveState: PlayerMoveState;
+    public idleState: PlayerIdleState;
+    public moveState: PlayerMoveState;
     private anim: animation.AnimationController;
+    private rb: RigidBody2D;
+    private speed = 0;
+    @property({ type: PlayerMovement })
+    public playerMovement: PlayerMovement;
 
     protected onLoad(): void {
         this.stateMachine = new PlayerStateMachine();
         this.idleState = new PlayerIdleState(this, this.stateMachine, PLAYER_ANIMATION_STATE.IDLE);
         this.moveState = new PlayerMoveState(this, this.stateMachine, PLAYER_ANIMATION_STATE.MOVE);
         this.anim = this.getComponentInChildren(animation.AnimationController);
-        input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this);
+        this.rb = this.getComponent(RigidBody2D);
     }
 
     protected start(): void {
@@ -26,25 +31,19 @@ export class Player extends Component {
 
     protected update(dt: number): void {
         this.stateMachine.getCurrentState().update();
-    }
-
-    protected onDestroy(): void {
-        input.off(Input.EventType.KEY_DOWN, this.onKeyDown, this);
-    }
-
-    private onKeyDown(event: EventKeyboard): void {
-        switch (event.keyCode) {
-            case KeyCode.KEY_I:
-                this.stateMachine.changeState(this.idleState);
-                break;
-            case KeyCode.KEY_M:
-                this.stateMachine.changeState(this.moveState);
-                break;
-        }
+        this.speed = this.playerMovement.getSpeed();
     }
 
     public getAnim(): animation.AnimationController {
         return this.anim;
+    }
+
+    public getRb(): RigidBody2D {
+        return this.rb;
+    }
+
+    public getSpeed(): number {
+        return this.speed;
     }
 
 }

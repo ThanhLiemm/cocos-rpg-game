@@ -1,11 +1,11 @@
-import { _decorator, Component, Node } from 'cc';
+import { _decorator } from 'cc';
 import { PlayerState } from './PlayerState';
-const { ccclass, property } = _decorator;
+const { ccclass } = _decorator;
 
 @ccclass('PlayerStateMachine')
 export class PlayerStateMachine {
     private currentState: PlayerState;
-    
+
     public getCurrentState(): PlayerState {
         return this.currentState;
     }
@@ -16,7 +16,7 @@ export class PlayerStateMachine {
     }
 
     public changeState(_newState: PlayerState): void {
-        if(this.currentState === _newState) {
+        if (this.currentState === _newState) {
             this.currentState.enter();
             return;
         }

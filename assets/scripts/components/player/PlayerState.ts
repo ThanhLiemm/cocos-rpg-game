@@ -1,7 +1,7 @@
-import { _decorator, Component, Node } from 'cc';
-import { PlayerStateMachine } from './PlayerStateMachine';
+import { _decorator, Vec2 } from 'cc';
 import { Player } from './Player';
-const { ccclass, property } = _decorator;
+import { PlayerStateMachine } from './PlayerStateMachine';
+const { ccclass } = _decorator;
 
 @ccclass('PlayerState')
 export class PlayerState {
@@ -20,7 +20,10 @@ export class PlayerState {
     }
 
     public update(): void {
-        console.log("I update ", this.animBoolName);
+        this.player.getRb().linearVelocity = new Vec2(this.player.getSpeed(), this.player.getRb().linearVelocity.y);
+
+        if (this.player.getSpeed() == 0)
+            this.stateMachine.changeState(this.player.idleState);
 
     }
 
