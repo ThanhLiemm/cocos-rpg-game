@@ -1,10 +1,30 @@
 export enum PLAYER_ANIMATION_STATE {
-    IDLE = "Idle",
-    MOVE = "Move",
+  IDLE = "Idle",
+  MOVE = "Move",
+  JUMP = "Jump",
+  DASH = "Dash",
+  WALL_SLIDE = "WallSlide",
+  ATTACK = "Attack",
 }
 
 export enum PLAYER_MOVEMENT_EVENTS {
-    PRESS_FORWARD = "press_forward",
-    PRESS_BACK = "press_back",
-    RELEASE_KEY = "release_key",
+  PRESS_FORWARD = "press_forward",
+  PRESS_BACK = "press_back",
+  RELEASE_KEY = "release_key",
+  PRESS_JUMP = "press_jump",
+  RELEASE_JUMP = "release_jump",
+  PRESS_DASH = "press_dash",
+  RELEASE_DASH = "release_dash",
+  PRESS_DOWN = "press_down",
+  RELEASE_DOWN = "release_down",
+}
+
+export enum PLAYER_ATTACK_EVENTS {
+  PRESS_PRIMARY_ATTACK = "press_primary_attack",
+  RELEASE_PRIMARY_ATTACK = "release_primary_attack",
+}
+
+export enum PLAYER_ANIMATION_VARIABLES {
+  Y_VELOCITY = "YVelocity",
+  COMBO_COUNTER = "ComboCounter",
 }

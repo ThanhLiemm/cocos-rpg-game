@@ -1,51 +1,103 @@
-import { _decorator, animation, Component, RigidBody2D } from 'cc';
-import { PLAYER_ANIMATION_STATE } from '../../concerns/type';
-import { PlayerIdleState } from './PlayerIdleState';
-import { PlayerMovement } from './PlayerMovement';
-import { PlayerMoveState } from './PlayerMoveState';
-import { PlayerStateMachine } from './PlayerStateMachine';
+import { _decorator, animation, Component, RigidBody2D, Vec2 } from "cc";
+import { PLAYER_ANIMATION_STATE } from "../../concerns/type";
+import { PlayerAirState } from "./state/PlayerAirState";
+import { PlayerIdleState } from "./state/PlayerIdleState";
+import { PlayerJumpState } from "./state/PlayerJumpState";
+import { PlayerManageMovement } from "./PlayerManageMovement";
+import { PlayerMoveState } from "./state/PlayerMoveState";
+import { PlayerStateMachine } from "./PlayerStateMachine";
+import { PlayerDashState } from "./state/PlayerDashState";
+import { PlayerWallSlideState } from "./state/PlayerWallSlideState";
+import { PlayerWallJumpState } from "./state/PlayerWallJumpState";
+import { PlayerManageCombat } from "./PlayerManageCombat";
+import { PlayerPrimaryAttackState } from "./state/PlayerPrimaryAttackState";
 const { ccclass, property } = _decorator;
 
-@ccclass('Player')
+@ccclass("Player")
 export class Player extends Component {
-    private stateMachine: PlayerStateMachine;
-    public idleState: PlayerIdleState;
-    public moveState: PlayerMoveState;
-    private anim: animation.AnimationController;
-    private rb: RigidBody2D;
-    private speed = 0;
-    @property({ type: PlayerMovement })
-    public playerMovement: PlayerMovement;
+  public idleState: PlayerIdleState;
+  public moveState: PlayerMoveState;
+  public jumpState: PlayerJumpState;
+  public airState: PlayerAirState;
+  public dashState: PlayerDashState;
+  public wallSlideState: PlayerWallSlideState;
+  public wallJumpState: PlayerWallJumpState;
+  public primaryAttackState: PlayerPrimaryAttackState;
 
-    protected onLoad(): void {
-        this.stateMachine = new PlayerStateMachine();
-        this.idleState = new PlayerIdleState(this, this.stateMachine, PLAYER_ANIMATION_STATE.IDLE);
-        this.moveState = new PlayerMoveState(this, this.stateMachine, PLAYER_ANIMATION_STATE.MOVE);
-        this.anim = this.getComponentInChildren(animation.AnimationController);
-        this.rb = this.getComponent(RigidBody2D);
-    }
+  private stateMachine: PlayerStateMachine;
+  private anim: animation.AnimationController;
+  private rb: RigidBody2D;
+  private playerMovement: PlayerManageMovement;
+  private playerCombat: PlayerManageCombat;
+  public isBusy = false;
 
-    protected start(): void {
-        this.stateMachine.initialize(this.idleState);
-    }
+  protected onLoad(): void {
+    this.anim = this.getComponentInChildren(animation.AnimationController);
+    this.rb = this.getComponent(RigidBody2D);
+    this.playerMovement = this.getComponent(PlayerManageMovement);
+    this.playerCombat = this.getComponent(PlayerManageCombat);
+    this.stateMachine = new PlayerStateMachine();
 
-    protected update(dt: number): void {
-        this.stateMachine.getCurrentState().update();
-        this.speed = this.playerMovement.getSpeed();
-    }
+    this.idleState = new PlayerIdleState(this, PLAYER_ANIMATION_STATE.IDLE);
+    this.moveState = new PlayerMoveState(this, PLAYER_ANIMATION_STATE.MOVE);
+    this.jumpState = new PlayerJumpState(this, PLAYER_ANIMATION_STATE.JUMP);
+    this.airState = new PlayerAirState(this, PLAYER_ANIMATION_STATE.JUMP);
+    this.dashState = new PlayerDashState(this, PLAYER_ANIMATION_STATE.DASH);
+    this.wallSlideState = new PlayerWallSlideState(this, PLAYER_ANIMATION_STATE.WALL_SLIDE);
+    this.wallJumpState = new PlayerWallJumpState(this, PLAYER_ANIMATION_STATE.JUMP);
+    this.primaryAttackState = new PlayerPrimaryAttackState(this, PLAYER_ANIMATION_STATE.ATTACK);
+  }
 
-    public getAnim(): animation.AnimationController {
-        return this.anim;
-    }
+  protected start(): void {
+    this.stateMachine.initialize(this.idleState);
+  }
 
-    public getRb(): RigidBody2D {
-        return this.rb;
-    }
+  protected update(dt: number): void {
+    this.stateMachine.getCurrentState().update(dt);
+  }
 
-    public getSpeed(): number {
-        return this.speed;
-    }
+  public getAnim(): animation.AnimationController {
+    return this.anim;
+  }
 
+  public getRb(): RigidBody2D {
+    return this.rb;
+  }
+
+  public getPlayerMovement(): PlayerManageMovement {
+    return this.playerMovement;
+  }
+
+  public getPlayerCombat(): PlayerManageCombat {
+    return this.playerCombat;
+  }
+
+  public getStateMachine(): PlayerStateMachine {
+    return this.stateMachine;
+  }
+
+  public getXVelocity(): number {
+    return this.rb.linearVelocity.x;
+  }
+
+  public getYVelocity(): number {
+    return this.rb.linearVelocity.y;
+  }
+
+  public animationTrigger(): void {
+    this.stateMachine.getCurrentState().animationFinishTrigger();
+  }
+
+  public setPlayerIsBusy(time: number): void {
+    this.isBusy = true;
+    this.scheduleOnce(() => (this.isBusy = false), time);
+  }
+
+  public setVelocity(x: number, y: number): void {
+    this.rb.linearVelocity = new Vec2(x, y);
+  }
+
+  public setZeroVelocity(): void {
+    this.rb.linearVelocity = new Vec2(0, 0);
+  }
 }
-
-

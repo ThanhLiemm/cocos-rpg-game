@@ -2,5 +2,37 @@
   "__version__": "1.0.6",
   "script": {
     "preserveSymlinks": true
-  }
+  },
+  "physics": {
+    "collisionGroups": [
+      {
+        "index": 1,
+        "name": "UI_2D"
+      },
+      {
+        "index": 2,
+        "name": "GROUND"
+      },
+      {
+        "index": 3,
+        "name": "PLAYER"
+      }
+    ],
+    "collisionMatrix": {
+      "0": 0,
+      "1": 0,
+      "2": 12,
+      "3": 12
+    }
+  },
+  "layer": [
+    {
+      "name": "GROUND",
+      "value": 524288
+    },
+    {
+      "name": "PLAYER",
+      "value": 262144
+    }
+  ]
 }

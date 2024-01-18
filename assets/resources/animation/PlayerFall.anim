@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.AnimationClip",
-    "_name": "PlayerJump",
+    "_name": "PlayerFall",
     "_objFlags": 0,
     "__editorExtras__": {
       "embeddedPlayerGroups": []
@@ -67,15 +67,15 @@
     ],
     "_values": [
       {
-        "__uuid__": "b0c57b0a-78e4-4107-8092-9099aaca93d2@9fcb0",
+        "__uuid__": "b0c57b0a-78e4-4107-8092-9099aaca93d2@f5c64",
         "__expectedType__": "cc.SpriteFrame"
       },
       {
-        "__uuid__": "b0c57b0a-78e4-4107-8092-9099aaca93d2@5462b",
+        "__uuid__": "b0c57b0a-78e4-4107-8092-9099aaca93d2@b6e97",
         "__expectedType__": "cc.SpriteFrame"
       },
       {
-        "__uuid__": "b0c57b0a-78e4-4107-8092-9099aaca93d2@38780",
+        "__uuid__": "b0c57b0a-78e4-4107-8092-9099aaca93d2@d23c7",
         "__expectedType__": "cc.SpriteFrame"
       }
     ]
