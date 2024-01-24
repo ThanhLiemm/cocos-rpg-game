@@ -33,6 +33,44 @@
     {
       "name": "PLAYER",
       "value": 262144
+    },
+    {
+      "name": "BACKGROUND",
+      "value": 131072
+    },
+    {
+      "name": "ENEMY",
+      "value": 65536
     }
-  ]
+  ],
+  "sorting-layer": {
+    "layers": [
+      {
+        "id": 0,
+        "name": "default",
+        "value": 0
+      },
+      {
+        "id": 1,
+        "name": "BACKGROUND",
+        "value": 1
+      },
+      {
+        "id": 2,
+        "name": "GROUND",
+        "value": 2
+      },
+      {
+        "id": 3,
+        "name": "ENEMY",
+        "value": 3
+      },
+      {
+        "id": 4,
+        "name": "PLAYER",
+        "value": 4
+      }
+    ],
+    "increaseId": 4
+  }
 }
