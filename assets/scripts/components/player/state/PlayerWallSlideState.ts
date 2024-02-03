@@ -8,14 +8,14 @@ export class PlayerWallSlideState extends PlayerState {
     super.update();
 
     if (this.movement.pressJumpKey) {
-      this.stateMachine.changeState(this.player.wallJumpState);
+      this.stateMachine.changeState(this.character.wallJumpState);
       return;
     }
     this.movement.pressDown
-      ? this.player.setVelocity(0, this.movement.statMaxFall)
-      : this.player.setVelocity(0, this.player.getYVelocity() * this.movement.statDecreaseFall);
-    if (this.movement.isGroundDetected()) this.stateMachine.changeState(this.player.idleState);
+      ? this.character.setVelocity(0, this.movement.statMaxFall)
+      : this.character.setVelocity(0, this.character.getYVelocity() * this.movement.statDecreaseFall);
+    if (this.movement.isGroundDetected()) this.stateMachine.changeState(this.character.idleState);
     if (this.movement.speed != 0 && this.movement.speed * this.movement.facDirection < 0)
-      this.stateMachine.changeState(this.player.idleState);
+      this.stateMachine.changeState(this.character.idleState);
   }
 }

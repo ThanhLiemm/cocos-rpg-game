@@ -1,50 +1,34 @@
 import { _decorator } from "cc";
+import { CharacterState } from "../../character/CharacterState";
 import { Player } from "../Player";
-import { PlayerManageMovement } from "../PlayerManageMovement";
-import { PlayerStateMachine } from "../PlayerStateMachine";
 import { PlayerManageCombat } from "../PlayerManageCombat";
+import { PlayerManageMovement } from "../PlayerManageMovement";
+import { Character } from "../../character/Character";
 const { ccclass } = _decorator;
 
 @ccclass("PlayerState")
-export class PlayerState {
-  protected stateMachine: PlayerStateMachine;
-  protected player: Player;
+export class PlayerState extends CharacterState<Player> {
   protected movement: PlayerManageMovement;
   protected combat: PlayerManageCombat;
-  protected stateTimer: number;
-  protected triggerCalled: boolean;
-  private animBoolName: string;
 
   constructor(_player: Player, _animBoolName: string) {
-    this.player = _player;
+    super();
+    this.character = _player;
     this.animBoolName = _animBoolName;
     this.stateMachine = _player.getStateMachine();
-    this.movement = _player.getPlayerMovement();
-    this.combat = _player.getPlayerCombat();
-  }
-
-  public enter(): void {
-    this.player.getAnim().setValue(this.animBoolName, true);
-    this.triggerCalled = false;
+    this.movement = _player.getCharacterMovement() as PlayerManageMovement;
+    this.combat = _player.getCharacterCombat() as PlayerManageCombat;
   }
 
   public update(dt?: number): void {
-    this.stateTimer -= dt;
+    super.update(dt);
     this.checkPlayerDash();
-  }
-
-  public exit(): void {
-    this.player.getAnim().setValue(this.animBoolName, false);
   }
 
   public checkPlayerDash(): void {
     if (this.movement.pressDash && this.movement.dashTimer < 0) {
       this.movement.dashTimer = this.movement.dashCoolDown;
-      this.stateMachine.changeState(this.player.dashState);
+      this.stateMachine.changeState(this.character.dashState);
     }
-  }
-
-  public animationFinishTrigger(): void {
-    this.triggerCalled = true;
   }
 }

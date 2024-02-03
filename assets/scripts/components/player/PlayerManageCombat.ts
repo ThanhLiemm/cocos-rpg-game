@@ -1,28 +1,16 @@
-import { _decorator, Component, Node } from "cc";
-import { PLAYER_ATTACK_EVENTS } from "../../concerns/type";
+import { _decorator } from "cc";
+import { CharacterManageCombat } from "../character/CharacterManageCombat";
 const { ccclass, property } = _decorator;
 
 @ccclass("PlayerManageCombat")
-export class PlayerManageCombat extends Component {
+export class PlayerManageCombat extends CharacterManageCombat {
   public pressMouseRight = false;
 
-  protected onLoad(): void {
-    this.node.on(PLAYER_ATTACK_EVENTS.PRESS_PRIMARY_ATTACK, this.handlePressPrimaryAttack, this);
-    this.node.on(
-      PLAYER_ATTACK_EVENTS.RELEASE_PRIMARY_ATTACK,
-      this.handleReleasePrimaryAttack,
-      this
-    );
-  }
-  start() {}
-
-  update(deltaTime: number) {}
-
-  private handlePressPrimaryAttack(): void {
+  public handlePressPrimaryAttack(): void {
     this.pressMouseRight = true;
   }
 
-  private handleReleasePrimaryAttack(): void {
+  public handleReleasePrimaryAttack(): void {
     this.pressMouseRight = false;
   }
 }

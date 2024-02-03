@@ -11,22 +11,22 @@ export class PlayerAirState extends PlayerState {
 
   public update(): void {
     super.update();
-    this.movement.controlFlip(this.movement.speed, this.player);
+    this.movement.controlFlip(this.movement.speed, this.character);
 
-    this.player.setVelocity(
+    this.character.setVelocity(
       this.movement.speed * this.movement.statDecreaseSpeed,
-      this.player.getYVelocity()
+      this.character.getYVelocity()
     );
-    this.player
+    this.character
       .getAnim()
-      .setValue(PLAYER_ANIMATION_VARIABLES.Y_VELOCITY, this.player.getYVelocity());
+      .setValue(PLAYER_ANIMATION_VARIABLES.Y_VELOCITY, this.character.getYVelocity());
 
     if (this.movement.isGroundDetected()) {
-      this.stateMachine.changeState(this.player.idleState);
+      this.stateMachine.changeState(this.character.idleState);
     }
-    if (this.movement.isWallDetected()) this.stateMachine.changeState(this.player.wallSlideState);
+    if (this.movement.isWallDetected()) this.stateMachine.changeState(this.character.wallSlideState);
     if (this.movement.pressDown) {
-      this.player.setVelocity(0, this.movement.statMaxFall);
+      this.character.setVelocity(0, this.movement.statMaxFall);
     }
   }
 }

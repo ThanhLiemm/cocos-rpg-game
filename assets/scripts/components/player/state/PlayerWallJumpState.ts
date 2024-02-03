@@ -8,14 +8,14 @@ export class PlayerWallJumpState extends PlayerState {
     super.enter();
     const jumpSpeed = this.movement.statWallJumpSpeed * -this.movement.facDirection;
 
-    this.player.setVelocity(
+    this.character.setVelocity(
       jumpSpeed,
       this.movement.jumpForce * this.movement.statDecreaseWallJump
     );
-    this.movement.controlFlip(jumpSpeed, this.player);
+    this.movement.controlFlip(jumpSpeed, this.character);
   }
 
   update(dt: number) {
-    this.stateMachine.changeState(this.player.airState);
+    this.stateMachine.changeState(this.character.airState);
   }
 }

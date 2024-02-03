@@ -7,8 +7,8 @@ export class PlayerMoveState extends PlayerGroundState {
   public update(): void {
     super.update();
 
-    this.player.setVelocity(this.movement.speed, this.player.getYVelocity());
+    this.character.setVelocity(this.movement.speed, this.character.getYVelocity());
 
-    if (this.movement.speed === 0) this.stateMachine.changeState(this.player.idleState);
+    if (this.movement.speed === 0) this.stateMachine.changeState(this.character.idleState);
   }
 }

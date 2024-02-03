@@ -6,13 +6,13 @@ const { ccclass } = _decorator;
 export class PlayerIdleState extends PlayerGroundState {
   public enter(): void {
     super.enter();
-    this.player.setZeroVelocity();
+    this.character.setZeroVelocity();
   }
   public update(): void {
     super.update();
 
-    if (this.movement.speed !== 0 && this.movement.isGroundDetected() && !this.player.isBusy) {
-      this.stateMachine.changeState(this.player.moveState);
+    if (this.movement.speed !== 0 && this.movement.isGroundDetected() && !this.character.getIsBusy()) {
+      this.stateMachine.changeState(this.character.moveState);
     }
   }
 }

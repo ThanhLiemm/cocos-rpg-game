@@ -12,19 +12,19 @@ export class PlayerDashState extends PlayerState {
   public update(dt?: number): void {
     super.update(dt);
 
-    this.player.setVelocity(this.movement.dashSpeed * this.movement.facDirection, 0);
+    this.character.setVelocity(this.movement.dashSpeed * this.movement.facDirection, 0);
 
     if (this.stateTimer < 0) {
       this.movement.isGroundDetected()
-        ? this.stateMachine.changeState(this.player.idleState)
-        : this.stateMachine.changeState(this.player.airState);
+        ? this.stateMachine.changeState(this.character.idleState)
+        : this.stateMachine.changeState(this.character.airState);
     }
     if (!this.movement.isGroundDetected() && this.movement.isWallDetected())
-      this.stateMachine.changeState(this.player.wallSlideState);
+      this.stateMachine.changeState(this.character.wallSlideState);
   }
 
   public exit(): void {
     super.exit();
-    this.player.setVelocity(0, this.player.getYVelocity());
+    this.character.setVelocity(0, this.character.getYVelocity());
   }
 }

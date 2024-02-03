@@ -1,9 +1,20 @@
+import { Node } from "cc";
+
 export enum PLAYER_ANIMATION_STATE {
   IDLE = "Idle",
   MOVE = "Move",
   JUMP = "Jump",
   DASH = "Dash",
   WALL_SLIDE = "WallSlide",
+  ATTACK = "Attack",
+}
+
+export enum SKELETON_ANIMATION_STATE {
+  IDLE = "Idle",
+  MOVE = "Move",
+  HIT = "Hit",
+  REACT = "React",
+  DEAD = "Dead",
   ATTACK = "Attack",
 }
 
@@ -27,4 +38,9 @@ export enum PLAYER_ATTACK_EVENTS {
 export enum PLAYER_ANIMATION_VARIABLES {
   Y_VELOCITY = "YVelocity",
   COMBO_COUNTER = "ComboCounter",
+}
+
+export interface RaycastResults {
+  target: Node;
+  distance: number;
 }

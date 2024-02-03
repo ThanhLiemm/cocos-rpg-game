@@ -18,12 +18,12 @@ export class PlayerPrimaryAttackState extends PlayerState {
       new Date().getTime() >= this.lastTimeAttacked + this.comboWindow * 1000
     )
       this.comboCounter = 0;
-    this.player.getAnim().setValue(PLAYER_ANIMATION_VARIABLES.COMBO_COUNTER, this.comboCounter);
+    this.character.getAnim().setValue(PLAYER_ANIMATION_VARIABLES.COMBO_COUNTER, this.comboCounter);
 
     let attackDirection = this.movement.facDirection;
     if (this.movement.speed !== 0)
       attackDirection = this.movement.speed / Math.abs(this.movement.speed);
-    this.player.setVelocity(
+    this.character.setVelocity(
       this.movement.attackMovement[this.comboCounter].x * attackDirection,
       this.movement.attackMovement[this.comboCounter].y
     );
@@ -32,8 +32,8 @@ export class PlayerPrimaryAttackState extends PlayerState {
   update(dt: number) {
     super.update(dt);
 
-    if (this.stateTimer < 0) this.player.setZeroVelocity();
-    if (this.triggerCalled) this.stateMachine.changeState(this.player.idleState);
+    if (this.stateTimer < 0) this.character.setZeroVelocity();
+    if (this.triggerCalled) this.stateMachine.changeState(this.character.idleState);
   }
 
   public exit(): void {
@@ -41,6 +41,6 @@ export class PlayerPrimaryAttackState extends PlayerState {
 
     this.comboCounter++;
     this.lastTimeAttacked = new Date().getTime();
-    this.player.setPlayerIsBusy(0.15);
+    this.character.setPlayerIsBusy(0.15);
   }
 }
