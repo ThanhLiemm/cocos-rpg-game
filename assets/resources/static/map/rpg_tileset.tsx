@@ -37,14 +37,11 @@
  <tile id="11">
   <image width="32" height="32" source="tiles/brick_4.png"/>
  </tile>
- <tile id="12">
-  <image width="32" height="32" source="tiles/brick_5.png"/>
+ <tile id="14">
+  <image width="32" height="32" source="tiles/brick_7.png"/>
  </tile>
  <tile id="13">
   <image width="32" height="32" source="tiles/brick_6.png"/>
- </tile>
- <tile id="14">
-  <image width="32" height="32" source="tiles/brick_7.png"/>
  </tile>
  <tile id="15">
   <image width="32" height="32" source="tiles/brick_8.png"/>
@@ -87,6 +84,9 @@
  </tile>
  <tile id="28">
   <image width="32" height="32" source="tiles/ceiling_1.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="44.8684" y="80.5263" width="0.131579" height="0.921053"/>
+  </objectgroup>
  </tile>
  <tile id="29">
   <image width="32" height="32" source="tiles/ceiling_2.png"/>
@@ -471,5 +471,11 @@
  </tile>
  <tile id="156">
   <image width="32" height="32" source="tiles/window_tall_3.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="10" y="10.1316" width="0.131579"/>
+  </objectgroup>
+ </tile>
+ <tile id="12">
+  <image width="32" height="32" source="tiles/brick_5.png"/>
  </tile>
 </tileset>
