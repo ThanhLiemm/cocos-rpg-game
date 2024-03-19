@@ -21,13 +21,23 @@
     "_exoticAnimation": null,
     "_events": [
       {
+        "frame": 0.08333333333333333,
+        "func": "",
+        "params": []
+      },
+      {
+        "frame": 0.08333333333333333,
+        "func": "attackTrigger",
+        "params": []
+      },
+      {
         "frame": 0.3333333333333333,
         "func": "",
         "params": []
       },
       {
         "frame": 0.3333333333333333,
-        "func": "playerAnimationTrigger",
+        "func": "animationTrigger",
         "params": []
       }
     ],

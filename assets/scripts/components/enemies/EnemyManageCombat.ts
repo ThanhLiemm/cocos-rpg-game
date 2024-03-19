@@ -10,4 +10,10 @@ export class EnemyManageCombat extends CharacterManageCombat {
   public lastAttack = 0;
   @property({ group: { name: "Combat Stat", id: "1" }, type: CCFloat })
   public battleTime = 4;
+
+  public attack(): void {
+    super.attack();
+    if(this.inAttackRange) console.log("Skeleton Attack");
+
+  }
 }

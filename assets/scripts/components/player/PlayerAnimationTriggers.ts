@@ -4,14 +4,14 @@ const { ccclass, property } = _decorator;
 
 @ccclass("PlayerAnimationTriggers")
 export class PlayerAnimationTriggers extends Component {
+  @property({type: Player})
   private player: Player;
-
-  protected onLoad(): void {
-    const parentsNode = find("Canvas/Player");
-    this.player = parentsNode.getComponent(Player);
-  }
 
   private animationTrigger(): void {
     this.player.animationTrigger();
+  }
+
+  private attackTrigger(): void {
+    this.player.getCharacterCombat().attack();
   }
 }

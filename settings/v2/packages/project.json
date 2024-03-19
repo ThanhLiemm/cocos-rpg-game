@@ -16,13 +16,28 @@
       {
         "index": 3,
         "name": "PLAYER"
+      },
+      {
+        "index": 4,
+        "name": "ENEMY"
+      },
+      {
+        "index": 5,
+        "name": "PLAYER_ATTACK_CHECK"
+      },
+      {
+        "index": 6,
+        "name": "ENEMY_ATTACK_CHECK"
       }
     ],
     "collisionMatrix": {
-      "0": 0,
-      "1": 0,
-      "2": 12,
-      "3": 12
+      "0": 16,
+      "1": 16,
+      "2": 28,
+      "3": 76,
+      "4": 39,
+      "5": 16,
+      "6": 8
     }
   },
   "layer": [
@@ -41,6 +56,10 @@
     {
       "name": "ENEMY",
       "value": 65536
+    },
+    {
+      "name": "PLAYER_ATTACK_CHECK",
+      "value": 32768
     }
   ],
   "sorting-layer": {
@@ -72,5 +91,6 @@
       }
     ],
     "increaseId": 4
-  }
+  },
+  "custom_joint_texture_layouts": []
 }
