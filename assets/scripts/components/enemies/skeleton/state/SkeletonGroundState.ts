@@ -8,7 +8,6 @@ export class SkeletonGroundState extends SkeletonState {
 
   update(deltaTime: number) {
     super.update(deltaTime);
-    if (this.movement.isSeePlayer() || this.movement.isDetectPlayer(this.character.node))
-      this.stateMachine.changeState(this.character.battleState);
+    if (this.movement.hasTarget()) this.stateMachine.changeState(this.character.battleState);
   }
 }

@@ -4,6 +4,9 @@ const { ccclass, property } = _decorator;
 
 @ccclass("CharacterManageMovement")
 export class CharacterManageMovement extends Component {
+  @property({ type: Character })
+  protected character: Character;
+
   //velocity info
   @property({ group: { name: "velocity stat", id: "1" }, type: CCFloat })
   public accelerate: number = 50;

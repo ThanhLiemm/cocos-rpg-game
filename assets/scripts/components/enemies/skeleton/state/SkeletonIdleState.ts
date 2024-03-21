@@ -6,7 +6,7 @@ const { ccclass } = _decorator;
 export class SkeletonIdleState extends SkeletonGroundState {
   public enter(): void {
     super.enter();
-    this.stateTimer = 3;
+    this.stateTimer = this.movement.thinkTime;
     this.character.setZeroVelocity();
   }
 
