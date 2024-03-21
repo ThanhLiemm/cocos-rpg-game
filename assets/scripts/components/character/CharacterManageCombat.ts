@@ -5,10 +5,8 @@ import {
   Collider2D,
   Component,
   Contact2DType,
-  ERigidBody2DType,
   IPhysics2DContact,
   RigidBody2D,
-  Vec2,
   Vec3,
 } from "cc";
 import { Character } from "./Character";
@@ -16,18 +14,17 @@ const { ccclass, property } = _decorator;
 
 @ccclass("CharacterManageCombat")
 export class CharacterManageCombat extends Component {
-
-  @property({type: Character})
+  @property({ type: Character })
   protected character: Character;
 
   //attack info
   @property({ group: { name: "range stat", id: "1" }, type: CCFloat })
   public attackCheckRadius: number;
   @property({ group: { name: "range stat", id: "1" }, type: Component })
-
   public attackCheck: Component;
   private collider: CircleCollider2D;
   private rb: RigidBody2D;
+  private target: Character;
   protected inAttackRange: boolean = false;
 
   protected onLoad(): void {
@@ -36,7 +33,10 @@ export class CharacterManageCombat extends Component {
   }
 
   protected update(dt: number): void {
-    this.attackCheck.node.position = new Vec3(this.attackCheck.node.position.x, this.attackCheck.node.position.y);
+    this.attackCheck.node.position = new Vec3(
+      this.attackCheck.node.position.x,
+      this.attackCheck.node.position.y
+    );
   }
 
   protected start(): void {
@@ -53,6 +53,7 @@ export class CharacterManageCombat extends Component {
   ): void {
     this.inAttackRange = true;
     contact.disabledOnce;
+    this.target = otherCollider.getComponent(Character);
   }
 
   protected onEndContact(
@@ -61,8 +62,24 @@ export class CharacterManageCombat extends Component {
     contact: IPhysics2DContact | null
   ): void {
     this.inAttackRange = false;
+    this.target = undefined;
+  }
+
+  protected impAttack(): void {
+    this.sendDamage();
   }
 
   public attack(): void {
+    if (this.inAttackRange) {
+      this.impAttack();
+    }
+  }
+
+  public receiveDamage(): void {
+    this.character.getFx().flashFX();
+  }
+
+  public sendDamage(): void {
+    if (this.target) this.target.getFx().flashFX();
   }
 }

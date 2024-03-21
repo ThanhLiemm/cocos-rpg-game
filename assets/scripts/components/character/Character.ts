@@ -2,6 +2,7 @@ import { _decorator, animation, Component, Node, RigidBody2D, Vec2 } from "cc";
 import { CharacterStateMachine } from "./CharacterStateMachine";
 import { CharacterManageMovement } from "./CharacterManageMovement";
 import { CharacterManageCombat } from "./CharacterManageCombat";
+import { CharacterFx } from "./CharacterFx";
 const { ccclass } = _decorator;
 
 @ccclass("Character")
@@ -11,11 +12,13 @@ export class Character extends Component {
   protected rb: RigidBody2D;
   protected characterMovement: CharacterManageMovement;
   protected characterCombat: CharacterManageCombat;
+  protected fx: CharacterFx;
   protected isBusy = false;
 
   protected onLoad(): void {
     this.anim = this.getComponentInChildren(animation.AnimationController);
     this.rb = this.getComponent(RigidBody2D);
+    this.fx = this.getComponent(CharacterFx)
   }
 
   protected update(dt: number): void {
@@ -73,5 +76,9 @@ export class Character extends Component {
 
   public setIsBusy(_isBusy: boolean): void {
     this.isBusy = _isBusy;
+  }
+
+  public getFx(): CharacterFx {
+    return this.fx;
   }
 }

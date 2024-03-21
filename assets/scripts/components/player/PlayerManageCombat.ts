@@ -14,10 +14,8 @@ export class PlayerManageCombat extends CharacterManageCombat {
     this.pressMouseRight = false;
   }
 
-  public attack(): void {
-    super.attack();
-    if(this.inAttackRange) console.log("Player Attack");
-
+  protected impAttack(): void {
+    super.impAttack();
+    if (this.inAttackRange) console.log("Player Attack");
   }
-
 }
