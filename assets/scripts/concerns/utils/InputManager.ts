@@ -1,20 +1,21 @@
 import { _decorator, Component, EventKeyboard, EventMouse, find, Input, input, KeyCode } from "cc";
 import { PlayerManageCombat } from "../../components/player/PlayerManageCombat";
 import { PlayerManageMovement } from "../../components/player/PlayerManageMovement";
+import { PlayerManager } from "../../components/player/PlayerManager";
 const { ccclass } = _decorator;
 
 @ccclass("InputManager")
 export class InputManager extends Component {
   private playerMovement: PlayerManageMovement;
   private playerCombat: PlayerManageCombat;
-  protected onLoad(): void {
+  protected start(): void {
     input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this);
     input.on(Input.EventType.KEY_UP, this.onKeyUp, this);
     input.on(Input.EventType.MOUSE_DOWN, this.onMouseDown, this);
     input.on(Input.EventType.MOUSE_UP, this.onMouseUp, this);
 
-    this.playerMovement = find("/Canvas/Player").getComponent(PlayerManageMovement);
-    this.playerCombat = find("/Canvas/Player").getComponent(PlayerManageCombat);
+    this.playerMovement = PlayerManager.getInstance().player.getComponent(PlayerManageMovement);
+    this.playerCombat = PlayerManager.getInstance().player.getComponent(PlayerManageCombat);
   }
 
   private onKeyDown(event: EventKeyboard): void {
