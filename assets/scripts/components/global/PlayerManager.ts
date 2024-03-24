@@ -1,5 +1,5 @@
 import { _decorator, Component } from "cc";
-import { Player } from "./Player";
+import { Player } from "../player/Player";
 const { ccclass, property, type } = _decorator;
 
 @ccclass("PlayerManager")

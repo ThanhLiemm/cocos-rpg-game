@@ -4,6 +4,7 @@ import { Player } from "../Player";
 import { PlayerManageCombat } from "../PlayerManageCombat";
 import { PlayerManageMovement } from "../PlayerManageMovement";
 import { Character } from "../../character/Character";
+import { SkillManager } from "../../global/SkillManager";
 const { ccclass } = _decorator;
 
 @ccclass("PlayerState")
@@ -26,8 +27,7 @@ export class PlayerState extends CharacterState<Player> {
   }
 
   public checkPlayerDash(): void {
-    if (this.movement.pressDash && this.movement.dashTimer < 0) {
-      this.movement.dashTimer = this.movement.dashCoolDown;
+    if (this.movement.pressDash && SkillManager.getInstance().dashSkill.canUseSkill()) {
       this.stateMachine.changeState(this.character.dashState);
     }
   }

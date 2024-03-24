@@ -1,18 +1,20 @@
 import { Vec2, _decorator } from "cc";
 import { PlayerState } from "./PlayerState";
+import { SkillManager } from "../../global/SkillManager";
 const { ccclass } = _decorator;
 
 @ccclass("PlayerDashState")
 export class PlayerDashState extends PlayerState {
   public enter(): void {
     super.enter();
-    this.stateTimer = this.movement.dashDuration;
+    this.stateTimer = SkillManager.getInstance().dashSkill.dashDuration;
   }
 
   public update(dt?: number): void {
     super.update(dt);
 
-    this.character.setVelocity(this.movement.dashSpeed * this.movement.facDirection, 0);
+    const speed = SkillManager.getInstance().dashSkill.dashSpeed;
+    this.character.setVelocity(speed * this.movement.facDirection, 0);
 
     if (this.stateTimer < 0) {
       this.movement.isGroundDetected()

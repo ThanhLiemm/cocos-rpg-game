@@ -1,7 +1,7 @@
 import { _decorator, Component, EventKeyboard, EventMouse, find, Input, input, KeyCode } from "cc";
 import { PlayerManageCombat } from "../../components/player/PlayerManageCombat";
 import { PlayerManageMovement } from "../../components/player/PlayerManageMovement";
-import { PlayerManager } from "../../components/player/PlayerManager";
+import { PlayerManager } from "./PlayerManager";
 const { ccclass } = _decorator;
 
 @ccclass("InputManager")

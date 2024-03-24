@@ -14,8 +14,6 @@ export class CharacterManageMovement extends Component {
   public maxSpeed = 12;
   @property({ group: { name: "velocity stat", id: "1" }, type: CCFloat })
   public jumpForce: number = 12;
-  @property({ group: { name: "velocity stat", id: "1" }, type: CCFloat })
-  public dashSpeed: number = 20;
   @property({ group: { name: "velocity stat", id: "1" }, type: [Vec2] })
   public attackMovement: Vec2[];
 

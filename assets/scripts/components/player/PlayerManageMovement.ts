@@ -12,13 +12,6 @@ export class PlayerManageMovement extends CharacterManageMovement {
   public statDecreaseWallJump = 0.5;
   public statMaxFall = -15;
   public statWallJumpSpeed = 15;
-  public dashDuration = 0.3;
-  public dashTimer = 0;
-  public dashCoolDown = 2;
-
-  protected update(dt: number): void {
-    this.dashTimer -= dt;
-  }
 
   public handleMoveForward(): void {
     this.speed = this.maxSpeed;
