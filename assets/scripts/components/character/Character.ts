@@ -18,7 +18,7 @@ export class Character extends Component {
   protected onLoad(): void {
     this.anim = this.getComponentInChildren(animation.AnimationController);
     this.rb = this.getComponent(RigidBody2D);
-    this.fx = this.getComponent(CharacterFx)
+    this.fx = this.getComponent(CharacterFx);
   }
 
   protected update(dt: number): void {
@@ -67,11 +67,17 @@ export class Character extends Component {
   }
 
   public setVelocity(x: number, y: number): void {
+    if (this.characterCombat.isKnocked) return;
     this.rb.linearVelocity = new Vec2(x, y);
   }
 
   public setZeroVelocity(): void {
+    if (this.characterCombat.isKnocked) return;
     this.rb.linearVelocity = new Vec2(0, 0);
+  }
+
+  public setKnockBack(x: number, y: number): void {
+    this.rb.linearVelocity = new Vec2(x, y);
   }
 
   public setIsBusy(_isBusy: boolean): void {

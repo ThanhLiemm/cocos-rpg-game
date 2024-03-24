@@ -6,7 +6,7 @@ import {
   Component,
   Contact2DType,
   IPhysics2DContact,
-  RigidBody2D,
+  Vec2,
   Vec3,
 } from "cc";
 import { Character } from "./Character";
@@ -22,14 +22,19 @@ export class CharacterManageCombat extends Component {
   public attackCheckRadius: number;
   @property({ group: { name: "range stat", id: "1" }, type: Component })
   public attackCheck: Component;
+
+  @property({ group: { name: "knock back stat", id: "2" }, type: Vec2 })
+  private knockBackDirection: Vec2 = new Vec2(0,0);
+  @property({ group: { name: "knock back stat", id: "2" }, type: CCFloat })
+  private knockBackDuration: number;
+  public isKnocked: boolean;
+
   private collider: CircleCollider2D;
-  private rb: RigidBody2D;
   private target: Character;
   protected inAttackRange: boolean = false;
 
   protected onLoad(): void {
     this.collider = this.attackCheck.getComponent(CircleCollider2D);
-    this.rb = this.attackCheck.getComponent(RigidBody2D);
   }
 
   protected update(dt: number): void {
@@ -77,9 +82,26 @@ export class CharacterManageCombat extends Component {
 
   public receiveDamage(): void {
     this.character.getFx().flashFX();
+    this.character.getCharacterCombat().hitKnockBack();
   }
 
   public sendDamage(): void {
-    if (this.target) this.target.getFx().flashFX();
+    if (this.target) {
+      this.target.getCharacterCombat().receiveDamage();
+    }
+  }
+
+  public hitKnockBack(): void {
+    const { knockBackDirection, knockBackDuration, character } = this;
+    this.isKnocked = true;
+
+    character.setKnockBack(
+      knockBackDirection.x * -character.getCharacterMovement().facDirection,
+      knockBackDirection.y
+    );
+
+    this.scheduleOnce((): void => {
+      this.isKnocked = false;
+    }, knockBackDuration);
   }
 }
