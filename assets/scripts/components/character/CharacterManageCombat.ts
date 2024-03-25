@@ -24,13 +24,13 @@ export class CharacterManageCombat extends Component {
   public attackCheck: Component;
 
   @property({ group: { name: "knock back stat", id: "2" }, type: Vec2 })
-  private knockBackDirection: Vec2 = new Vec2(0,0);
+  private knockBackDirection: Vec2 = new Vec2(0, 0);
   @property({ group: { name: "knock back stat", id: "2" }, type: CCFloat })
-  private knockBackDuration: number;
-  public isKnocked: boolean;
 
+  private knockBackDuration: number;
   private collider: CircleCollider2D;
-  private target: Character;
+  public isKnocked: boolean;
+  public target: Character;
   public inAttackRange: boolean = false;
 
   protected onLoad(): void {
@@ -69,7 +69,7 @@ export class CharacterManageCombat extends Component {
     this.inAttackRange = false;
     this.target = undefined;
   }
- 
+
   public attack(): void {
     this.sendDamage();
   }

@@ -3,7 +3,6 @@ import { CharacterState } from "../../character/CharacterState";
 import { Player } from "../Player";
 import { PlayerManageCombat } from "../PlayerManageCombat";
 import { PlayerManageMovement } from "../PlayerManageMovement";
-import { Character } from "../../character/Character";
 import { SkillManager } from "../../global/SkillManager";
 const { ccclass } = _decorator;
 
@@ -27,7 +26,8 @@ export class PlayerState extends CharacterState<Player> {
   }
 
   public checkPlayerDash(): void {
-    if (this.movement.pressDash && SkillManager.getInstance().dashSkill.canUseSkill()) {
+    if (this.movement.pressDash && SkillManager.instance.dashSkill.canUseSkill()) {
+      SkillManager.instance.dashSkill.useSkill();
       this.stateMachine.changeState(this.character.dashState);
     }
   }

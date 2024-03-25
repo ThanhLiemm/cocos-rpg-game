@@ -14,8 +14,8 @@ export class InputManager extends Component {
     input.on(Input.EventType.MOUSE_DOWN, this.onMouseDown, this);
     input.on(Input.EventType.MOUSE_UP, this.onMouseUp, this);
 
-    this.playerMovement = PlayerManager.getInstance().player.getComponent(PlayerManageMovement);
-    this.playerCombat = PlayerManager.getInstance().player.getComponent(PlayerManageCombat);
+    this.playerMovement = PlayerManager.instance.player.getComponent(PlayerManageMovement);
+    this.playerCombat = PlayerManager.instance.player.getComponent(PlayerManageCombat);
   }
 
   private onKeyDown(event: EventKeyboard): void {

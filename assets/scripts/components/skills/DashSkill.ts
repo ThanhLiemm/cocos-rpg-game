@@ -1,11 +1,10 @@
-import { _decorator, Component, Node } from "cc";
+import { _decorator, CCFloat, Component, Node } from "cc";
 import { Skill } from "./Skill";
 const { ccclass, property, type } = _decorator;
 
 @ccclass("DashSkill")
 export class DashSkill extends Skill {
-  @type(Number)
-  public dashDuration: number = 0.3;
-  @type(Number)
+  @property({ group: { name: "Dash Skill", id: "2" }, type: CCFloat })
   public dashSpeed: number = 20;
+  public duration = 0.3
 }

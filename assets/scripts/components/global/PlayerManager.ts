@@ -4,17 +4,22 @@ const { ccclass, property, type } = _decorator;
 
 @ccclass("PlayerManager")
 export class PlayerManager extends Component {
-  private static instance: PlayerManager;
   @type(Player)
-  public player: Player;
+  private playerInput: Player;
+
+  private static _instance: PlayerManager;
 
   protected onLoad(): void {
     //prevent duplicate PlayerManger Node in Scene
-    if (!!PlayerManager.instance) PlayerManager.instance.node.destroy();
-    PlayerManager.instance = this;
+    if (!!PlayerManager._instance) PlayerManager._instance.node.destroy();
+    PlayerManager._instance = this;
+  }
+  
+  public get player() {
+    return this.playerInput;
   }
 
-  public static getInstance(): PlayerManager {
-    return PlayerManager.instance;
+  public static get instance() {
+    return PlayerManager._instance;
   }
 }
