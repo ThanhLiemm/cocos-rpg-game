@@ -12,6 +12,7 @@ export class PlayerAnimationTriggers extends Component {
   }
 
   private attackTrigger(): void {
+    if(this.player.getCharacterCombat().inAttackRange)
     this.player.getCharacterCombat().attack();
   }
 }

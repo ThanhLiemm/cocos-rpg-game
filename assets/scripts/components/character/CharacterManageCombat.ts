@@ -31,7 +31,7 @@ export class CharacterManageCombat extends Component {
 
   private collider: CircleCollider2D;
   private target: Character;
-  protected inAttackRange: boolean = false;
+  public inAttackRange: boolean = false;
 
   protected onLoad(): void {
     this.collider = this.attackCheck.getComponent(CircleCollider2D);
@@ -69,15 +69,9 @@ export class CharacterManageCombat extends Component {
     this.inAttackRange = false;
     this.target = undefined;
   }
-
-  protected impAttack(): void {
-    this.sendDamage();
-  }
-
+ 
   public attack(): void {
-    if (this.inAttackRange) {
-      this.impAttack();
-    }
+    this.sendDamage();
   }
 
   public receiveDamage(): void {

@@ -12,6 +12,7 @@ export class SkeletonAnimationTriggers extends Component {
   }
 
   private attackTrigger(): void {
-    this.skeleton.getCharacterCombat().attack();
+    if(this.skeleton.getCharacterCombat().inAttackRange)
+      this.skeleton.getCharacterCombat().attack();
   }
 }
