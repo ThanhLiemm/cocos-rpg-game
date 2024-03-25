@@ -40,6 +40,15 @@ export enum PLAYER_ANIMATION_VARIABLES {
   COMBO_COUNTER = "ComboCounter",
 }
 
+export enum RENDER_ORDER {
+  CAMERA = 0,
+  BACKGROUND = 1,
+  SKELETON = 2,
+  PLAYER_CLONE = 3,
+  PLAYER = 4,
+  TILE_MAP = 5,
+}
+
 export interface RaycastResults {
   target: Node;
   distance: number;

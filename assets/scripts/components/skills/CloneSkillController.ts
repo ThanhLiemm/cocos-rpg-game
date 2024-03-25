@@ -14,6 +14,7 @@ import {
 import { getRandomIntInclusive } from "../../concerns/utils/commons";
 import { Character } from "../character/Character";
 import { PlayerManager } from "../global/PlayerManager";
+import { RENDER_ORDER } from "../../concerns/type";
 const { ccclass, type } = _decorator;
 
 @ccclass("CloneSkillController")
@@ -52,6 +53,7 @@ export class CloneSkillController extends Component {
 
   public setupClone(_newPos: Vec3, cloneDuration: number): void {
     const playerDirection = PlayerManager.instance.player.getCharacterMovement().facDirection;
+    this.node.setSiblingIndex(RENDER_ORDER.PLAYER_CLONE);
     this.node.position = _newPos;
     this.node.setScale(playerDirection * this.node.scale.x, this.node.scale.y);
     this.cloneTimer = cloneDuration;
