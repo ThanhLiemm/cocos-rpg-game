@@ -1,4 +1,4 @@
-import { _decorator, Component, EventKeyboard, EventMouse, find, Input, input, KeyCode } from "cc";
+import { _decorator, Component, EventKeyboard, EventMouse, Input, input, KeyCode } from "cc";
 import { PlayerManageCombat } from "../../components/player/PlayerManageCombat";
 import { PlayerManageMovement } from "../../components/player/PlayerManageMovement";
 import { PlayerManager } from "./PlayerManager";
@@ -62,6 +62,10 @@ export class InputManager extends Component {
     switch (event.getButton()) {
       case EventMouse.BUTTON_LEFT:
         this.playerCombat.handlePressPrimaryAttack();
+        break;
+      case EventMouse.BUTTON_RIGHT:
+        this.playerCombat.handlePressAim();
+        break;
     }
   }
 
@@ -69,6 +73,10 @@ export class InputManager extends Component {
     switch (event.getButton()) {
       case EventMouse.BUTTON_LEFT:
         this.playerCombat.handleReleasePrimaryAttack();
+        break;
+      case EventMouse.BUTTON_RIGHT:
+        this.playerCombat.handleReleaseAim();
+        break;
     }
   }
 }

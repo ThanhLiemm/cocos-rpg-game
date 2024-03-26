@@ -6,12 +6,18 @@ const { ccclass } = _decorator;
 export class PlayerGroundState extends PlayerState {
   public update(): void {
     super.update();
-
     this.movement.controlFlip(this.movement.speed, this.character);
 
     if (this.movement.isGroundDetected() && this.movement.pressJumpKey)
       this.stateMachine.changeState(this.character.jumpState);
-    if (!this.movement.isGroundDetected()) this.stateMachine.changeState(this.character.airState);
-    if (this.combat.pressMouseRight) this.stateMachine.changeState(this.character.primaryAttackState);
+
+    if (!this.movement.isGroundDetected())
+      this.stateMachine.changeState(this.character.airState);
+
+    if (this.combat.pressMouseLeft)
+      this.stateMachine.changeState(this.character.primaryAttackState);
+
+    if(this.combat.pressMouseRight)
+      this.stateMachine.changeState(this.character.aimSwordState);
   }
 }

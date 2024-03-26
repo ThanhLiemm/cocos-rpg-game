@@ -5,11 +5,10 @@ const { ccclass, property, type } = _decorator;
 
 @ccclass('CloneSkill')
 export class CloneSkill extends Skill {
-
-    public duration: number = 1;
-    
-    @property({ group: { name: "Clone Skill", id: "2" }, type: Prefab })
+    @type(Prefab)
     private clonePrefab: Prefab;
+    
+    public duration: number = 1;
 
     public createClone(_newPos: Vec3): void {
         const newClone: Node = instantiate(this.clonePrefab);

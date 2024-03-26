@@ -1,10 +1,11 @@
-import { _decorator, Component, find, Node } from "cc";
+import { _decorator, Component } from "cc";
+import { SkillManager } from "../global/SkillManager";
 import { Player } from "./Player";
 const { ccclass, property } = _decorator;
 
 @ccclass("PlayerAnimationTriggers")
 export class PlayerAnimationTriggers extends Component {
-  @property({type: Player})
+  @property({ type: Player })
   private player: Player;
 
   private animationTrigger(): void {
@@ -12,7 +13,10 @@ export class PlayerAnimationTriggers extends Component {
   }
 
   private attackTrigger(): void {
-    if(this.player.getCharacterCombat().inAttackRange)
-    this.player.getCharacterCombat().attack();
+    if (this.player.getCharacterCombat().inAttackRange) this.player.getCharacterCombat().attack();
+  }
+
+  private throwSword(): void {
+    SkillManager.instance.swordSkill.createSword(this.player.node.position);
   }
 }

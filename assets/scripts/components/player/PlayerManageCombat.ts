@@ -4,14 +4,31 @@ const { ccclass, property } = _decorator;
 
 @ccclass("PlayerManageCombat")
 export class PlayerManageCombat extends CharacterManageCombat {
-  public pressMouseRight = false;
+  private _pressMouseLeft = false;
+  private _pressMouseRight = false;
+
+  public get pressMouseLeft(): boolean {
+    return this._pressMouseLeft;
+  }
+
+  public get pressMouseRight(): boolean {
+    return this._pressMouseRight;
+  }
 
   public handlePressPrimaryAttack(): void {
-    this.pressMouseRight = true;
+    this._pressMouseLeft = true;
   }
 
   public handleReleasePrimaryAttack(): void {
-    this.pressMouseRight = false;
+    this._pressMouseLeft = false;
+  }
+
+  public handlePressAim(): void {
+    this._pressMouseRight = true;
+  }
+
+  public handleReleaseAim(): void {
+    this._pressMouseRight = false;
   }
 
   public attack(): void {

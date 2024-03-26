@@ -4,7 +4,7 @@ const { ccclass, property, type } = _decorator;
 
 @ccclass("DashSkill")
 export class DashSkill extends Skill {
-  @property({ group: { name: "Dash Skill", id: "2" }, type: CCFloat })
+  @type(Number)
   public dashSpeed: number = 20;
   public duration = 0.3
 }

@@ -1,11 +1,11 @@
-import { _decorator, CCFloat, Component } from "cc";
+import { _decorator, Component } from "cc";
 const { ccclass, property, type } = _decorator;
 
 @ccclass("Skill")
 export class Skill extends Component {
-  @property({ group: { name: "General", id: "1" }, type: CCFloat })
+  @type(Number)
   protected cooldown: number;
-  @property({ group: { name: "General", id: "1" }, type: CCFloat })
+  @type(Number)
   public duration: number;
 
   private cooldownTimer: number;

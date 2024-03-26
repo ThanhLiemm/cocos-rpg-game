@@ -7,6 +7,8 @@ export enum PLAYER_ANIMATION_STATE {
   DASH = "Dash",
   WALL_SLIDE = "WallSlide",
   ATTACK = "Attack",
+  AIM_SWORD = "AimSword",
+  CATCH_SWORD = "CatchSword",
 }
 
 export enum SKELETON_ANIMATION_STATE {
