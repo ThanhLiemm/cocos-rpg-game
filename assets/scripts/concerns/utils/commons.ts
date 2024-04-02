@@ -21,3 +21,11 @@ export const getRandomIntInclusive = (min: number, max: number): number => {
   const maxFloored = Math.floor(max);
   return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled); // The maximum is inclusive and the minimum is inclusive
 };
+
+export const toVec3 = (vec2: Vec2): Vec3 => {
+  return new Vec3(vec2.x, vec2.y);
+};
+
+export const toVec2 = (vec3: Vec3): Vec2 => {
+  return new Vec2(vec3.x, vec3.y);
+};

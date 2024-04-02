@@ -1,6 +1,7 @@
 import { _decorator, Component } from "cc";
 import { SkillManager } from "../global/SkillManager";
 import { Player } from "./Player";
+import { PlayerManageCombat } from "./PlayerManageCombat";
 const { ccclass, property } = _decorator;
 
 @ccclass("PlayerAnimationTriggers")
@@ -17,6 +18,7 @@ export class PlayerAnimationTriggers extends Component {
   }
 
   private throwSword(): void {
-    SkillManager.instance.swordSkill.createSword(this.player.node.position);
+    const combat = this.player.getCharacterCombat() as PlayerManageCombat;
+    SkillManager.instance.swordSkill.createSword(this.player.node.position, combat.aimDir);
   }
 }

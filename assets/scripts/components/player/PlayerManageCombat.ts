@@ -6,7 +6,7 @@ const { ccclass, property } = _decorator;
 export class PlayerManageCombat extends CharacterManageCombat {
   private _pressMouseLeft = false;
   private _pressMouseRight = false;
-  private _aimDir: Vec2 = new Vec2;
+  private _aimDir: Vec2 = new Vec2();
 
   public get pressMouseLeft(): boolean {
     return this._pressMouseLeft;
@@ -28,8 +28,13 @@ export class PlayerManageCombat extends CharacterManageCombat {
     this._pressMouseLeft = false;
   }
 
-  public handlePressAim(): void {
+  public handlePressAim(_mousePos: Vec3): void {
     this._pressMouseRight = true;
+    Vec2.subtract(
+      this._aimDir,
+      new Vec2(_mousePos.x, _mousePos.y),
+      new Vec2(this.character.node.worldPosition.x, this.character.node.worldPosition.y)
+    );
   }
 
   public handleReleaseAim(_mousePos: Vec3): void {
@@ -37,7 +42,8 @@ export class PlayerManageCombat extends CharacterManageCombat {
     Vec2.subtract(
       this._aimDir,
       new Vec2(_mousePos.x, _mousePos.y),
-      new Vec2(this.character.node.worldPosition.x, this.character.node.worldPosition.y));
+      new Vec2(this.character.node.worldPosition.x, this.character.node.worldPosition.y)
+    );
   }
 
   public attack(): void {

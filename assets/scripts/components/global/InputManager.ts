@@ -65,7 +65,7 @@ export class InputManager extends Component {
         this.playerCombat.handlePressPrimaryAttack();
         break;
       case EventMouse.BUTTON_RIGHT:
-        this.playerCombat.handlePressAim();
+        this.playerCombat.handlePressAim(screenToWorldPosition(event.getLocation()));
         break;
     }
   }

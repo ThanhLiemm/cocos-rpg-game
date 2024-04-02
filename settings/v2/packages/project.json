@@ -28,16 +28,21 @@
       {
         "index": 6,
         "name": "ENEMY_ATTACK_CHECK"
+      },
+      {
+        "index": 7,
+        "name": "PLAYER_WEAPON"
       }
     ],
     "collisionMatrix": {
       "0": 16,
       "1": 16,
-      "2": 28,
+      "2": 156,
       "3": 76,
       "4": 39,
       "5": 16,
-      "6": 8
+      "6": 8,
+      "7": 4
     }
   },
   "layer": [
@@ -60,6 +65,10 @@
     {
       "name": "PLAYER_ATTACK_CHECK",
       "value": 32768
+    },
+    {
+      "name": "PLAYER_WEAPON",
+      "value": 16384
     }
   ],
   "sorting-layer": {

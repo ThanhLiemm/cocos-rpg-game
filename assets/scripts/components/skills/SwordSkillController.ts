@@ -1,4 +1,5 @@
 import { _decorator, animation, CircleCollider2D, Component, RigidBody2D, Vec2, Vec3 } from "cc";
+import { RENDER_ORDER } from "../../concerns/type";
 import { Player } from "../player/Player";
 const { ccclass, property } = _decorator;
 
@@ -17,6 +18,7 @@ export class SwordSkillController extends Component {
 
   public setupSword(_newPos: Vec3, _dir: Vec2, _gravityScale: number): void {
     this.node.position = _newPos;
+    this.node.setSiblingIndex(RENDER_ORDER.PLAYER_WEAPON);
     this.rb.linearVelocity = _dir;
     this.rb.gravityScale = _gravityScale;
   }
