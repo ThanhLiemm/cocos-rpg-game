@@ -2,6 +2,7 @@ import { _decorator, Component, EventKeyboard, EventMouse, Input, input, KeyCode
 import { PlayerManageCombat } from "../../components/player/PlayerManageCombat";
 import { PlayerManageMovement } from "../../components/player/PlayerManageMovement";
 import { PlayerManager } from "./PlayerManager";
+import { screenToWorldPosition } from "../../concerns/utils/commons";
 const { ccclass } = _decorator;
 
 @ccclass("InputManager")
@@ -75,7 +76,7 @@ export class InputManager extends Component {
         this.playerCombat.handleReleasePrimaryAttack();
         break;
       case EventMouse.BUTTON_RIGHT:
-        this.playerCombat.handleReleaseAim();
+        this.playerCombat.handleReleaseAim(screenToWorldPosition(event.getLocation()));
         break;
     }
   }
